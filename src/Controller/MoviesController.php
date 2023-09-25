@@ -27,10 +27,20 @@ class MoviesController extends AbstractController
     #[Route('/movies/pagination', name: 'app_movies_pagination', methods: ['GET'])]
     public function pagination(EntityManagerInterface $em, Request $request): JsonResponse
     {
-        $page = $request->query->get('page',1);
-        if($page < 1) return $this->json(['error' => 'Page not found', 'status_code' => 404], 404);
-        $movies = $em->getRepository(Movie::class)->findBy([], null, 5, $page-1);
-        if (!$movies) return $this->json(['error' => 'Movies not found', 'status_code' => 404], 404);
+        $title = $request->query->get('title');
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 10);
+
+        if ($page < 1) {
+            return $this->json(['error' => 'Page not found', 'status_code' => 404], 404);
+        }
+
+        $movies = $em->getRepository(Movie::class)->findByTitleAndPage($title, $page, $limit);
+
+        if (!$movies) {
+            return $this->json(['error' => 'Movies not found', 'status_code' => 404], 404);
+        }
+
         return $this->json($movies, 200, [], ['groups' => 'movie']);
     }
 
