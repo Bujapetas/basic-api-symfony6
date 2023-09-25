@@ -62,6 +62,6 @@ class CountriesController extends AbstractController
         if (!$country) return $this->json(['error' => 'Country not found', 'status_code' => 404], 404);
         $em->remove($country);
         $em->flush();
-        return $this->json(null, 204);
+        return $this->json($country, 200, [], ['groups' => 'country']);
     }
 }

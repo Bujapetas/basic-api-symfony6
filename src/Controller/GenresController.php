@@ -62,6 +62,6 @@ class GenresController extends AbstractController
         if (!$genre) return $this->json(['error' => 'Genre not found', 'status_code' => 404], 404);
         $em->remove($genre);
         $em->flush();
-        return $this->json(null, 204);
+        return $this->json($genre, 200, [], ['groups' => 'genre']);
     }
 }
