@@ -17,7 +17,7 @@ This project provides CRUD operations on three main entities:
 
 ### Movie
 - `GET /movies`: Retrieve a list of all movies.
-- `GET /movies/pagination?page={num}&limit={num}&title={string}`: Retrieve a paginated list of movies. With paging and title search filters
+- `GET /movies/pagination?page={num}&limit={num}&title={string}`: Retrieve a paginated list of movies with title search filter.
 - `GET /movies/{id}`: Retrieve a movie by its ID.
 - `GET /movies/by-genre/{genre}`: Retrieve movies by genre.
 - `GET /movies/by-country/{country}`: Retrieve movies by country.
